@@ -6,6 +6,7 @@
     "hooks": {
         "stream": {
             "apparmor": "stream.apparmor",
+            "urls":     "stream.urls",
             "desktop":  "stream.desktop"
         }
     },

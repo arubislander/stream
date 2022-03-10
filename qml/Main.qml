@@ -80,4 +80,11 @@ MainView {
         
         visible: false
     }
+
+    Connections {
+        target: UriHandler
+        onOpened: {
+            console.log("Open fron UriHandler")
+        }
+    }
 }
