@@ -141,11 +141,12 @@ PageBase {
                                     errorLabel.text = loginResult.errormessage
                                     if (loginResult.status == "ok") {
 
-                                        generalSettings.currentAccount = accountNameField.text
+                                        provider.settings.category = accountNameField.text
                                         provider.settings.serverurl = serverurlField.text
                                         provider.settings.username = usernameField.text
                                         provider.settings.password = passwordField.text
-
+                                        providerSettings.saveSettings(provider.settings)
+                                        
                                         mainStack.clear()
                                         mainStack.push( Qt.resolvedUrl("HomePage.qml"),{
                                             streamingProvider:  provider,

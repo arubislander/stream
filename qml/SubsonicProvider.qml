@@ -8,15 +8,15 @@ Item {
     property alias playlistModel: _playlistModel
     property alias playlistsModel: _playlistsModel
 
-    Settings {
+    Item {
         id: _settings
 
-        category: "Subsonic"
+        property string category: providerSettings.category
 
-        property int accountType: 0 // Account::Type::Subsonic
-        property string serverurl
-        property string username
-        property string password
+        property int accountType: providerSettings.accountType
+        property string serverurl: providerSettings.serverurl
+        property string username: providerSettings.username
+        property string password: providerSettings.password
 
         function needsCredentials() {
             return password == ""

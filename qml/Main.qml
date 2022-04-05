@@ -14,12 +14,14 @@ MainView {
     objectName: 'mainView'
     applicationName: 'stream.slft'
     automaticOrientation: true
-    Settings{
+    Settings {
         id: generalSettings
 
         category: "General"
+        //fileName: StandardPaths.writableLocation(StandardPaths.AppConfigLocation).replace("file://","") + "general.conf"
+
         property bool darkMode: false
-        property string currentAccount
+        property string currentAccount : providerSettings.category
 
         onDarkModeChanged: Theme.name = darkMode ? "Ubuntu.Components.Themes.SuruDark" : "Ubuntu.Components.Themes.Ambiance"
         onCurrentAccountChanged: provider.settings.category = currentAccount
@@ -27,8 +29,29 @@ MainView {
         Component.onCompleted: {
             console.debug( "CurrentAccount: ", currentAccount, "; Accounts#: ", AccountModel.rowCount())
             if (currentAccount == "" && AccountModel.rowCount() > 0) {
-                currentAccount = AccountModel.get(0).name;
+                providerSettings.category = AccountModel.get(0).name;
+            } else {
+                providerSettings.category = currentAccount
             }
+        }
+    }
+
+    Settings {
+        id: providerSettings
+
+        property int accountType
+        property string serverurl
+        property string username
+        property string password
+
+        Component.onDestruction: saveSettings(proivder.settings)
+        
+        function saveSettings(settings) {
+            category = settings.category
+            accountType = settings.accountType
+            serverUrl = settings.serverUrl
+            username = settings.username
+            password = settings.password
         }
     }
 
@@ -72,8 +95,10 @@ MainView {
 
     SubsonicProvider {
         id: provider
-        settings.category: generalSettings.currentAccount
+//        settings.category: generalSettings.currentAccount
     }
+
+
 
     PlayerPage {
         id: playerPage
