@@ -75,7 +75,6 @@ PageBase {
     Component{
         id: deleteDialog
         
-
         Dialog{
             id: deleteConfirm
             
