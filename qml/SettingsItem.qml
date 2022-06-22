@@ -58,7 +58,7 @@ ListItem {
 
         // Put album art in UbuntuShape
         source: Image {
-                    source: Qt.resolvedUrl("../icons/subsonic.png")
+                    source: Qt.resolvedUrl("../icons/stream.svg")
                 }
 
         aspect: UbuntuShape.Inset

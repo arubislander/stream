@@ -36,7 +36,7 @@ PageBase {
                     leftMargin: units.gu(2)
                 }
 
-                source: Qt.resolvedUrl("../icons/subsonic.png")
+                source: Qt.resolvedUrl("../icons/stream.svg")
             }
             Label{
                 id: subSonicLabel

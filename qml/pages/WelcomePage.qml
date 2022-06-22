@@ -79,7 +79,7 @@ PageBase {
             height: units.gu(8)
             width: units.gu(8)
 
-            source: Qt.resolvedUrl("../icons/subsonic.png")
+            source: Qt.resolvedUrl("../icons/stream.svg")
 
             MouseArea {
                 anchors.fill: parent
