@@ -26,11 +26,6 @@ Item {
         callApi(getUrl("unstar", songid),callbackFunc)
     }
 
-    function callApi(url, callbackFunc) {
-        pingModel.callbackFunc = callbackFunc
-        pingModel.source = url
-    }
-
     function getCoverArt(id) {
         return getUrl("getCoverArt", id)
     }
@@ -66,24 +61,29 @@ Item {
         return getUrl("getPodcasts", id)
     }
 
-    function login(serverurl,username,password,callbackFunc) {
-        pingModel.callbackFunc = callbackFunc
-        salt = Util.generateRandomSalt(12)
-        token = Util.getToken(password,salt)
-        pingModel.source = serverurl + "/rest/ping.view?v=1.13&c=stream.sflt&u=" + username + "&s=" + salt + "&t=" + token
+    function login(serverurl, username, password, callbackFunc) {
+        var salt = Util.generateRandomSalt(12)
+        var token = Util.getToken(password,salt)
+        var url = serverurl + "/rest/ping.view?v=1.13&c=stream.sflt&u=" + username + "&s=" + salt + "&t=" + token
+        callApi(url, callbackFunc)
     }
 
-    XmlListModel {
-        id: pingModel
+     function callApi(url, callbackFunc) {
+        apiModel.callbackFunc = callbackFunc
+        apiModel.source = url
+    }
+
+   XmlListModel {
+        id: apiModel
 
         property var callbackFunc
         
         onStatusChanged: {
-            console.log(pingModel.source)
-            console.log(pingModel.status)
-            console.log(pingModel.get(0))
+            console.log(apiModel.source)
+            console.log(apiModel.status)
+            console.log(apiModel.get(0))
             if (status == XmlListModel.Ready && callbackFunc) {
-                callbackFunc(pingModel.get(0))
+                callbackFunc(apiModel.get(0))
             }
         }
 
